@@ -1,0 +1,117 @@
+{% extends 'navigation.html' %}
+
+{% block title %}Make Prediction{% endblock %}
+
+{% block content %}
+		
+<div class="p-5 pb-md-4 mx-auto text-center rounded">
+    <div class="col-lg-12 p-2 mt-3">
+			<form action="{{ url_for('result') }}" method="post">
+				<fieldset class="border border-2 border-secondary rounded-3 p-3" >
+				
+						<legend class="float-none w-auto px-3 text-start">Enter Patient's Information</legend>
+
+						<div class="row justify-content-start">
+							<div class="col-lg-12 mb-3">
+								<div class="input-group">
+									<span class="input-group-text">Name</span>
+									<input class="form-control" type="text" placeholder="Enter patient's Age" name="name" id="name" required>
+								</div>
+                            </div>
+                        </div>
+						
+						<div class="row justify-content-start">
+							<div class="col-lg-12 mb-3">
+								<div class="input-group">
+									<span class="input-group-text">IC No.</span>
+									<input class="form-control" type="text" placeholder="Enter patient's IC No." name="ic" id="ic" required>
+								</div>
+                            </div>
+                        </div>
+						
+						<div class="row justify-content-start">
+							<div class="col-lg-12 mb-3">
+								<div class="input-group">
+									<span class="input-group-text">Contact No.</span>
+									<input class="form-control" type="text" placeholder="Enter patient's Phone No." name="phoneNo" id="phoneNo" required>
+								</div>
+                            </div>
+                        </div>
+
+						<div class="row justify-content-start">
+							<div class="col-lg-6 mb-3">
+								<div class="input-group">
+									<label class="input-group-text" for="gender">Gender</label>
+									<select class="form-select" name="gender" id="gender" required>
+										<option selected>Choose Gender...</option>
+										<option value="1">Male</option>
+										<option value="2">Female</option>
+									</select>
+								</div>
+                            </div>
+
+							<div class="col-lg-6 mb-3">
+								<div class="input-group">
+									<span class="input-group-text">Age</span>
+									<input class="form-control" type="text" placeholder="Enter patient's Age" name="age" id="age" required>
+								</div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+							<div class="col-lg-3 mb-3">
+								<div class="input-group">
+									<input class="form-control" type="text" value="Fever" disabled>
+									<div class="input-group-text">
+										<input class="form-check-input mt-0" type="checkbox" name="fever" value="1">
+										<input type="hidden" name="fever" value="0">
+									</div>
+								</div>
+                            </div>
+                            
+							<div class="col-lg-3 mb-3">
+								<div class="input-group">
+									<input class="form-control" type="text" value="Cough" disabled>
+									<div class="input-group-text">
+										<input class="form-check-input mt-0" type="checkbox" name="cough" value="1">
+										<input type="hidden" name="cough" value="0">
+									</div>
+								</div>
+                            </div>
+
+							<div class="col-lg-3 mb-3">
+								<div class="input-group">
+									<input class="form-control" type="text" value="Fatigue" disabled>
+									<div class="input-group-text">
+										<input class="form-check-input mt-0" type="checkbox" name="fatigue" value="1">
+										<input type="hidden" name="fatigue" value="0">
+									</div>
+								</div>
+                            </div>
+
+							<div class="col-lg-3 mb-3">
+								<div class="input-group">
+									<input class="form-control" type="text" value="Shortness of breath" disabled>
+									<div class="input-group-text">
+										<input class="form-check-input mt-0" type="checkbox" name="dyspnea" value="1">
+										<input type="hidden" name="dyspnea" value="0">
+									</div>
+								</div>
+                            </div>
+                        </div>
+
+						<div class="row justify-content-start">
+							<div class="col-lg-12 mb-3">
+								<div class="input-group">
+									<span class="input-group-text">Temperature (&#8451;)</span>
+									<input class="form-control" type="text" placeholder="Enter patient's highest temperature" name="temperature" id="temperature" required>
+								</div>
+                            </div>
+                        </div>
+
+						<input class="btn btn-outline-dark mx-auto mt-3 mb-3" type="submit" value="Predict &raquo;">
+				</fieldset>
+			</form>			
+	</div>
+</div>
+{% endblock %}

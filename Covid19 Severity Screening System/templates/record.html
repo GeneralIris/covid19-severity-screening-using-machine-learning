@@ -1,0 +1,65 @@
+{% extends 'navigation.html' %}
+
+{% block title %}Patient's Record{% endblock %}
+
+{% block content %}
+
+<div class="p-5 pb-md-4 mx-auto text-center">
+	
+	<div class="p-2 mt-3">
+		<h1>Patient's Record</h1>
+	</div>
+	
+	<hr>
+
+	<div class="p-3">
+		<table class="table table-striped" id="record">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">IC</th>
+					<th scope="col">Phone No</th>
+					<th scope="col">Type</th>
+					<th scope="col">Screened Time</th>
+					<th scope="col">Status</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<form action="{{ url_for('updateStatus') }}" method="post">
+					{% for patient in patients %}
+					<tr>
+						<td><a href="{{ url_for('patient',patientId=patient['id']) }}">{{ patient['name'] }}</a></td>
+						<td>{{ patient['ic'] }}</td>
+						<td>{{ patient['phoneNo'] }}</td>
+						<td class="text-capitalize">{{ patient['type'] }}</td>
+						<td>{{ patient['time'] }}</td>
+						<td class="text-capitalize">{{ patient['status'] }}</td>
+						<td class="text-capitalize">
+							<div class="input-group">
+								<select class="form-select form-select-sm" name="status" id="status" required>
+									<option value="{{ patient['status'] }}" selected>Update Status</option>-->
+									<option value="examined">Examined</option>
+									<option value="waiting">Waiting</option>
+								</select>
+								<input type="hidden" name="id" value="{{ patient['id'] }}">
+								<button class="btn btn-outline-primary btn-sm" type="submit">Update</button>
+							</div>
+						</td>
+					</tr>
+					{% endfor %}
+				</form>
+			</tbody>
+		</table>
+	</div>
+	
+</div>	
+
+<script>
+	$(document).ready( function () {
+    	$('#record').DataTable();
+	} );
+</script>
+
+{% endblock %}
+
