@@ -201,7 +201,7 @@ def record():
         if 'loggedin' in session:
 
             cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cur.execute("SELECT * FROM patients ORDER BY time DESC")
+            cur.execute("SELECT * FROM patients")
             patients = cur.fetchall()
 
             user = session['name']
@@ -217,14 +217,11 @@ def updateStatus():
     id = request.form['id']
     status = request.form['status']
 
-    if status != 'examined' or status != 'waiting':
-        return redirect(url_for('record'))
-    else:
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute(
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
             'UPDATE patients SET status=%s WHERE id=%s',
             (status, id,))
-        mysql.connection.commit()
+    mysql.connection.commit()
 
     return redirect(url_for('record'))
 
@@ -328,6 +325,7 @@ def result():
     fatigue = int(request.form['fatigue'])
     dyspnea = int(request.form['dyspnea'])
     input_temperature = float(request.form['temperature'])
+    status = 'waiting'
 
     gender = ''
     if input_gender == 1:
@@ -371,9 +369,9 @@ def result():
 
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cur.execute('INSERT INTO patients (name, ic, phoneNo, gender, age, fever, cough, fatigue, dyspnea, '
-                'temperature, frontlinerId, type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                'temperature, type, frontlinerId, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                 (name, ic, phoneNo, gender, input_age, fever, cough, fatigue, dyspnea, input_temperature,
-                 frontlinerId, severity,))
+                 severity, frontlinerId, status,))
     mysql.connection.commit()
 
     return render_template('result.html', severity=severity, accuracy=accuracy)

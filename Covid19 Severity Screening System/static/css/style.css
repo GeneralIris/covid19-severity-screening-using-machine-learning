@@ -97,3 +97,8 @@ input[disabled]
 {
     background-color:#FF5757 !important;
 }
+
+.table
+{
+    border: 0px solid #ddd !important;
+}
