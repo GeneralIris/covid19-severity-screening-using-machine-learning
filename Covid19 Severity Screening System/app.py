@@ -368,8 +368,8 @@ def result():
         severity = 'severe'
 
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute('INSERT INTO patients (name, ic, phoneNo, gender, age, fever, cough, fatigue, dyspnea, '
-                'temperature, type, frontlinerId, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+    cur.execute('INSERT INTO patients (name, ic, phoneNo, gender, age, fever, cough, fatigue, dyspnea, temperature,'
+                'type, frontlinerId, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                 (name, ic, phoneNo, gender, input_age, fever, cough, fatigue, dyspnea, input_temperature,
                  severity, frontlinerId, status,))
     mysql.connection.commit()
